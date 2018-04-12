@@ -1,0 +1,31 @@
+.navbar-nav > li > a {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar-brand {
+    height: 15px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar > .container-fluid > .navbar-collapse {
+    height: 15px !important;
+}
+
+.navbar {
+    min-height: 0;
+    border-radius: 0;
+}
+
+.search {
+    padding: 4px;
+}
+
+.table {
+    margin-bottom: 10px;
+}
+
+.pagination {
+    margin-top: 10px;
+}

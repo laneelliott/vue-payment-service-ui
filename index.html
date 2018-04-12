@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DonorFlow Payment Service</title>
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Admin CSS -->
+    <link rel="stylesheet" type="text/css" href="./styles/Admin.css">
+    <!-- NonHidingNav -->
+    <link rel="stylesheet" type="text/css" href="./styles/ThinNonHidingNav.css">
+</head>
+<body>
+    <div style='margin-bottom: 0'>
+        <nav class="navbar navbar-inverse" role="navigation" style="z-index: 1000; margin-bottom: 0; letter-spacing: .5px;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" style="color:white">DonorFlow</a>
+                </div>
+    
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li id="TXGridButtonInNavBar">
+                            <a href="/donorflow-app/TXGrid">Transactions</a>
+                        </li>
+                        <li id="DashboardButtonInNavBar">
+                            <a href="/donorflow-app/Dashboard">Dashboard</a>
+                        </li>
+                        <li id="ReportButtonInNavBar">
+                            <a href="/donorflow-app/Reports">Reports</a>
+                        </li>
+                        <li id="AdminButtonInNavBar">
+                            <a href="/donorflow-app/Admin">Admin</a>
+                        </li>
+                    </ul>
+    
+                    <ul class="nav navbar-nav navbar-right" style="padding-left:2em">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" role="button" data-toggle="dropdown">
+                                Lane Anderson
+                                <span class="caret"></span>
+                            </a>
+                            <ul id="g-account-menu2" class="dropdown-menu" role="menu" style="width: 250px">
+                                <li>
+                                    <a href="/donorflow-app/Account/Login?logout=1">
+                                        <i class="icon-logout"></i> Log Out</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>   
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </div>
+    <!-- SideNav -->
+    <div class="sidebar">
+        <ul class="nav nav-sidebar">
+            <li>
+                <a href="/donorflow-app/Admin/ManageDashboards/">Manage Dashboards</a>
+            </li>
+            <li>
+                <a href="/donorflow-app/Admin/Campaign/">Manage Campaigns</a>
+            </li>
+            <li>
+                <a href="/donorflow-app/Admin/ChangeStatus">Change Transaction Status</a>
+            </li>
+            <li>
+                <a href="/donorflow-app/Admin/ManageIntervals">View Intervals</a>
+            </li>
+            <li>
+                <a href="/donorflow-app/Admin/SearchMatchStats">Search-Match Accuracy</a>
+            </li>
+    
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3 col-md-2">
+    
+            <div class="sidebar">
+                <ul class="nav nav-sidebar">
+                    <li>
+                        <a href="/donorflow-app/Admin/ManageDashboards/">Manage Dashboards</a>
+                    </li>
+                    <li>
+                        <a href="/donorflow-app/Admin/Campaign/">Manage Campaigns</a>
+                    </li>
+                    <li>
+                        <a href="/donorflow-app/Admin/ChangeStatus">Change Transaction Status</a>
+                    </li>
+                    <li>
+                        <a href="/donorflow-app/Admin/ManageIntervals">View Intervals</a>
+                    </li>
+                    <li>
+                        <a href="/donorflow-app/Admin/SearchMatchStats">Search-Match Accuracy</a>
+                    </li>
+    
+                </ul>
+            </div>
+    
+            <div id="CR-Post-Trigger-Modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="CR-Push-Alert" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h3 class="text-center">
+                                <strong> Trigger CR Post</strong>
+                            </h3>
+                            <h5 class="text-center">
+                                Are you sure you want to trigger the CR Post?
+                            </h5>
+    
+                            <br>
+                            <div class="btn-group" style="width: 100%">
+                                <button class="btn btn-success" style="width:50%" id="TriggerCRPost" target="_newtab" data-dismiss="modal">Yes</button>
+                                <button class="btn btn-danger" style="width:50%" target="_newtab" data-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div id="CR-Push-Trigger-Modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="CR-Push-Alert" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h3 class="text-center">
+                                <strong> Trigger CR Push</strong>
+                            </h3>
+                            <h5 class="text-center">
+                                Are you sure you want to trigger the CR Push?
+                            </h5>
+    
+                            <br>
+                            <div class="btn-group" style="width: 100%">
+                                <button class="btn btn-success" style="width:50%" id="TriggerCRPush" target="_newtab" data-dismiss="modal">Yes</button>
+                                <button class="btn btn-danger" style="width:50%" target="_newtab" data-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+<!-- /////////////////////////////////////////// -->
+<!-- \\\    \\    //  ||   ||  ||====        \\\ -->
+<!-- ///     \\  //   ||___||  ||===         /// -->
+<!-- \\\      \\//    |_____|  ||====        \\\ -->
+<!-- /////////////////////////////////////////// -->
+        <div class="col-sm-6 col-md-8">
+            <div id="psv">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title text-center" v-once>{{pTitle}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <input v-model="query" type="text" class="form-control" aria-label="search">
+                            <div class="input-group-btn">
+                                <button v-on:click="search()"type="button" class="btn btn-default">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>{{processedQuery}}</p>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col-sm-6 col-md-8 -->
+    </div> <!-- end row that vue is in -->
+
+
+    <!-- JQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS CDN -->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Vue CDN -->
+    <script type="text/javascript" src="https://unpkg.com/vue"></script>
+    <!-- Axios CDN -->
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script type="text/javascript">
+        var psv = new Vue({
+            el: '#psv',
+            data: {
+                pTitle: 'Payment Service',
+                query: '',
+                processedQuery: ''
+            },
+            methods: {
+                search() {
+                    this.processedQuery = 'http://moody.org/dummy-api/' + this.query;
+                    console.log(this.processedQuery);
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
