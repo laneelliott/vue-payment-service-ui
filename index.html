@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="./styles/Admin.css">
     <!-- NonHidingNav -->
     <link rel="stylesheet" type="text/css" href="./styles/ThinNonHidingNav.css">
+    <!-- App CSS -->
+    <link rel="stylesheet" type="text/css" href="./styles/app.css">
 </head>
 <body>
     <div style='margin-bottom: 0'>
@@ -164,16 +166,45 @@
                     <div class="panel-heading">
                         <h3 class="panel-title text-center" v-once>{{pTitle}}</h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body"  v-if="selectedUser !== ''">
+                        <p class="text-center">{{selectedUser.name.title}} {{selectedUser.name.first}} {{selectedUser.name.last}}</p>
+                        <img class="text-center" v-bind:src="selectedUser.picture.large">
+                    </div>
+                    <div class="panel-body row">
                         <div class="input-group">
-                            <input v-model="query" type="text" class="form-control" aria-label="search">
+                            <input v-model.lazy.trim="searchQuery" v-on:keyup.enter="search()" type="text" class="form-control" aria-label="search">
                             <div class="input-group-btn">
                                 <button v-on:click="search()"type="button" class="btn btn-default">Search</button>
+                                <button v-on:click="reset()" type="button" class="btn btn-default">Reset</button>
                             </div>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <p>{{processedQuery}}</p>
+                        <!-- Table -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Address</th>
+                                    <th>City</th>
+                                    <th>State</th>
+                                    <th>Zip</th>
+                                </tr>
+                            </thead>
+                            <tbody v-cloak>
+                                <tr v-for="user, key in users" v-on:click="selectUser(key, $event)">
+                                    <td>{{user.registered}}</td>
+                                    <td>{{user.name.first}}</td>
+                                    <td>{{user.name.last}}</td>
+                                    <td>{{user.location.street}}</td>
+                                    <td>{{user.location.city}}</td>
+                                    <td>{{user.location.state}}</td>
+                                    <td>{{user.location.postcode}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -189,23 +220,38 @@
     <script type="text/javascript" src="https://unpkg.com/vue"></script>
     <!-- Axios CDN -->
     <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+    <!-- Vue Javascript -->
     <script type="text/javascript">
         var psv = new Vue({
             el: '#psv',
             data: {
                 pTitle: 'Payment Service',
-                query: '',
-                processedQuery: ''
+                searchQuery: '',
+                searchCategory: '',
+                users: [],
+                masterUserList: [],
+                selectedUser: ''
+            },
+            mounted: function() {
+                axios.get('https://randomuser.me/api/?results=20').then( (res) => {
+                    console.log(res.data.results);
+                    this.masterUserList = res.data.results;
+                    this.users = this.masterUserList;
+                })
             },
             methods: {
-                search() {
-                    this.processedQuery = 'http://moody.org/dummy-api/' + this.query;
-                    console.log(this.processedQuery);
+                search: function() {
+                    this.users = this.masterUserList.filter( user => user.name.first.indexOf(this.searchQuery) !== -1 || user.name.last.indexOf(this.searchQuery) !== -1 );
+                },
+                reset: function() {
+                    this.users = this.masterUserList;
+                },
+                selectUser: function(key, event) {
+                    this.selectedUser = this.users[key];
                 }
             }
         })
     </script>
-
+    <!-- End Vue Javascript -->
 </body>
 </html>
